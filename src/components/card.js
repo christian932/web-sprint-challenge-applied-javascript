@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -17,6 +19,35 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
+ 
+  let cardDiv = document.createElement('div');
+  cardDiv.classList.add('card');
+
+  let headlineDiv = document.createElement('div');
+  headlineDiv.textContent = article.headline;
+  headlineDiv.classList.add('headline');
+  cardDiv.appendChild(headlineDiv);
+
+  let authorDiv = document.createElement('div');
+  authorDiv.classList.add('author');
+  cardDiv.appendChild(authorDiv);
+
+  let imgContainer = document.createElement('div');
+  imgContainer.classList.add("img-container");
+  authorDiv.appendChild(imgContainer);
+
+  let img = document.createElement('img');
+  img.src = article.authorPhoto;
+  imgContainer.appendChild(img);
+
+  let spanAuthorName = document.createElement('span');
+  spanAuthorName.textContent = `by ${article.authorName}`;
+  authorDiv.appendChild(spanAuthorName);
+
+  cardDiv.addEventListener('click',(event)=>{
+    console.log(headlineDiv);
+  })
+  return cardDiv;
 }
 
 const cardAppender = (selector) => {
@@ -28,6 +59,35 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
+ 
+  const parentCard = document.querySelector(selector);
+
+  axios.get('https://lambda-times-api.herokuapp.com/articles').then((res)=>{
+    console.log(res);
+
+  const bootstrap = res.data.articles.bootstrap;
+  bootstrap.forEach(element => {
+   parentCard.appendChild(Card(element));
+  });
+  const jpData = res.data.articles.javascript;
+  jpData.forEach((element)=>{
+    parentCard.appendChild(Card(element));
+  });
+  const jquery = res.data.articles.jquery;
+  jquery.forEach((element)=>{
+    parentCard.appendChild(Card(element));
+  });
+  const node = res.data.articles.node;
+  node.forEach((element)=>{
+    parentCard.appendChild(Card(element));
+  });
+  const technology = res.data.articles.technology;
+      technology.forEach(element => {
+        parentCard.appendChild(Card(element));
+      });
+  }).catch((err)=>{
+    console.log(err);
+  })
 }
 
 export { Card, cardAppender }

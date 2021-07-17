@@ -76,7 +76,21 @@ After finishing your required elements, you can push your work further. These go
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. What is the DOM?
+
+JS object holding every element
+
 2. What is an event?
+
+It's every person's interaction with the website
+
 3. What is an event listener?
+
+It's the browser looking for an event to happen and when it has been triggered, a specific code is run
+
 4. Why would we convert a NodeList into an Array?
+
+It's to make it easier to change since NodeList cannot use the same methods as an array
+
 5. What is a component?
+
+It's a part or element of a larger item however, in JS, it's a function.
